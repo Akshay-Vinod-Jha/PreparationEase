@@ -26,6 +26,10 @@ const LoginScreen = () => {
     console.log("opening register page");
     router.push("/Register");
   };
+  const goToForgotPassword = () => {
+    console.log("opening forgot password page");
+    router.push("/ForgotPassword");
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.upper}>
@@ -56,7 +60,7 @@ const LoginScreen = () => {
 
         <TextLink
           text="Forgot Password?"
-          onPress={() => console.log("Forgot password pressed")}
+          onPress={() => goToForgotPassword()}
           style={styles.forgotPassword}
         />
       </View>
