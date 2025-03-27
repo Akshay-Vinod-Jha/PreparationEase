@@ -8,6 +8,7 @@ import { Image } from "react-native";
 import { useRouter } from "expo-router";
 const PrepaseLogo = require("../images/PrepaseLogo.jpg");
 const AppLogo = require("../images/Logo.png");
+import { StatusBar } from 'react-native';
 const LoginScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -17,6 +18,7 @@ const LoginScreen = () => {
   const handleLogin = () => {
     // Implement login logic here
     console.log("Login attempt with:", username);
+    router.push("/(dashboard)/MainDashboard");
   };
 
   const togglePasswordVisibility = () => {
@@ -32,6 +34,7 @@ const LoginScreen = () => {
   }
   return (
     <SafeAreaView style={styles.container}>
+          <StatusBar backgroundColor="#E6E0FF" barStyle="dark-content" />
       <View style={styles.upper}>
         <Image source={AppLogo} style={styles.imageStyle} />
         <Image source={PrepaseLogo} />
