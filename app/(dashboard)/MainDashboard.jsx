@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import Card from '../../components/Card';
-
+import { useRouter } from "expo-router";
 import { StatusBar } from 'react-native';
 
 
@@ -11,7 +11,11 @@ const MainDashboard = () => {
   const detectLanguageImage = require('../../assets/images/Logo.png'); // Replace with your actual path
   const summarizeText = require('../../assets/images/Logo.png');       // Replace with your actual path
   const optimizeNotes = require('../../assets/images/Logo.png');      // Replace with your actual path
-
+ const router = useRouter();
+    const handleDetectLanguage=()=>{
+      console.log("This is the handle detect language button click");
+      router.push("./DetectLanguage/NotesListScreen");
+    }
   return (
     <View style={styles.container}>
             <StatusBar backgroundColor="#E6E0FF" barStyle="dark-content" />
@@ -46,6 +50,8 @@ const MainDashboard = () => {
           imageSource={detectLanguageImage}
           featureName="Detect Language"
           description="Identify the language used in uploaded notes."
+         // onPress={() => navigation.navigate('./DetectLanguage/NotesListScreen')}
+         onPress={handleDetectLanguage}
         />
 
         {/* Card 2 */}
