@@ -10,7 +10,7 @@ import "expo-dev-client";
 import { db, setDoc, doc, getDoc } from "@/firebaseConfig";
 const PrepaseLogo = require("../images/PrepaseLogo.jpg");
 const AppLogo = require("../images/Logo.png");
-import { StatusBar } from 'react-native';
+import { StatusBar } from "react-native";
 const LoginScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,31 +23,31 @@ const LoginScreen = () => {
     console.log("username is:-", username, "password is:-", password);
     setLoginStatus("loading");
     try {
-      // No false information
       if (!username.trim() || !password.trim()) {
-        throw new Error("username and password cannot be empty");
+        throw new Error("Username and Password Cannot Be Empty");
       }
-
-      // Checking already occupied or not username
-      const snapshot = await getDoc(doc(db, "users", username));
-
-      // If snapshot exists, username is already taken
-      if (snapshot.exists()) {
-        console.log("username is occupied");
-        throw new Error("a username is already available");
+      const snapshot = await getDoc(doc(db, "users", username.trim()));
+      console.log(snapshot.exists());
+      if (!snapshot.exists()) {
+        throw new Error("No Such User with such Username Found");
       }
-
-      // Username is available
-      const data = await setDoc(doc(db, "users", username.trim()), {
-        password: password.trim(),
-      });
-
+      if (password != snapshot.data()["password"]) {
+        console.log("password matched failed");
+        throw new Error("Wrong Password Provided");
+      }
       setPassword(password.trim());
       setUsername(username.trim());
-      console.log("status:success", data);
+      console.log("status:success");
       setLoginStatus("success");
+      setTimeout(() => {
+        router.push({
+          pathname: "/(dashboard)/MainDashboard",
+          params: {
+            username,
+          },
+        });
+      }, 2100);
     } catch (error) {
-      // Ensure we're handling the error correctly
       const errorMessage =
         error instanceof Error
           ? error.message
@@ -74,11 +74,11 @@ const LoginScreen = () => {
   const goToForgotPassword = () => {
     console.log("opening forgot password page");
     router.push("/ForgotPassword");
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-          <StatusBar backgroundColor="#E6E0FF" barStyle="dark-content" />
+      <StatusBar backgroundColor="#E6E0FF" barStyle="dark-content" />
       <View style={styles.upper}>
         <Image source={AppLogo} style={styles.imageStyle} />
         <Image source={PrepaseLogo} />
@@ -108,7 +108,7 @@ const LoginScreen = () => {
         )}
         {loginStatus === "loading" && (
           <Button
-            title="Performing Authentication"
+            title="Wait While we Log You In"
             onPress={() => {}}
             disabled
           />

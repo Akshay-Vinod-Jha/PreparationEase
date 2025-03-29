@@ -1,38 +1,132 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import Card from '../../components/Card';
-import { useRouter } from "expo-router";
-import { StatusBar } from 'react-native';
-
+import React, { useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+  StatusBar,
+} from "react-native";
+import Card from "../../components/Card";
+import { useRouter, useLocalSearchParams } from "expo-router";
+import Icon from "react-native-vector-icons/MaterialIcons";
+const features = [
+  {
+    id: 1,
+    name: "Detect Language",
+    image: require("../../images/translate.png"),
+    navigateTo: "/(tools)/(detectlanguage)/first",
+  },
+  {
+    id: 2,
+    name: "Translate Notes",
+    image: require("../../images/Translator-amico.png"),
+    navigateTo: "/(tools)/(translatenotes)/first",
+  },
+  {
+    id: 3,
+    name: "Analyze Notes",
+    image: require("../../images/Research paper-amico.png"),
+    navigateTo: "/(tools)/(analyzenotes)/first",
+  },
+  {
+    id: 4,
+    name: "Extract Keywords",
+    image: require("../../images/Tabs-rafiki.png"),
+    navigateTo: "/(tools)/(extractkeywords)/first",
+  },
+  {
+    id: 5,
+    name: "Visualize Notes",
+    image: require("../../images/Notes-amico.png"),
+    navigateTo: "/(tools)/(visualizenotes)/first",
+  },
+  {
+    id: 6,
+    name: "Check Grammar",
+    image: require("../../images/Choose-rafiki.png"),
+    navigateTo: "/(tools)/(checkgrammar)/first",
+  },
+  {
+    id: 7,
+    name: "Listen to Notes",
+    image: require("../../images/Audiobook-pana.png"),
+    navigateTo: "/(tools)/(texttoaudio)/first",
+  },
+  {
+    id: 8,
+    name: "Images to Notes",
+    image: require("../../images/Online translator-amico.png"),
+    navigateTo: "/(tools)/(imagetonotes)/first",
+  },
+  {
+    id: 9,
+    name: "Handwritten Notes Converter",
+    image: require("../../images/Notes-bro.png"),
+    navigateTo: "/(tools)/(texttohand)/first",
+  },
+  {
+    id: 10,
+    name: "Share Your Notes",
+    image: require("../../images/Photo Sharing-bro.png"),
+    navigateTo: "/(tools)/(sharenotes)/first",
+  },
+];
 
 const MainDashboard = () => {
+  const { username } = useLocalSearchParams();
+  const router = useRouter();
 
-// Example image URLs (replace with your actual URLs)
-  const detectLanguageImage = require('../../assets/images/Logo.png'); // Replace with your actual path
-  const summarizeText = require('../../assets/images/Logo.png');       // Replace with your actual path
-  const optimizeNotes = require('../../assets/images/Logo.png');      // Replace with your actual path
- const router = useRouter();
-    const handleDetectLanguage=()=>{
-      console.log("This is the handle detect language button click");
-      router.push("./DetectLanguage/NotesListScreen");
-    }
+  useEffect(() => {
+    console.log("MainDashboard username is", username);
+  }, [username]);
+
+  const renderFeatureCard = ({ item }) => (
+    <Card
+      imageSource={item.image}
+      featureName={item.name}
+      onPress={() => {
+        router.push({
+          pathname: item.navigateTo,
+          params: {
+            username,
+          },
+        });
+      }}
+    />
+  );
+
   return (
     <View style={styles.container}>
-            <StatusBar backgroundColor="#E6E0FF" barStyle="dark-content" />
+      <StatusBar backgroundColor="#E6E0FF" barStyle="dark-content" />
 
-      {/* Header Section (Same as before) */}
+      {/* Header Section */}
       <View style={styles.header}>
         <Text style={styles.prepEaseText}>PREPEASE</Text>
-        <View style={styles.profileIcon} /> {/* Placeholder for profile icon */}
+        <View style={styles.profileIcon}>
+          <Icon name="person" size={25} color="black" />
+        </View>
       </View>
 
-      {/* Welcome Section (Same as before) */}
+      {/* Welcome Section */}
       <View style={styles.welcomeSection}>
         <Text style={styles.welcomeText}>Welcome</Text>
-        <Text style={styles.nameText}>AtharvaKanthak!</Text>
+        <Text style={styles.nameText}>{username || "User"}!</Text>
         <Text style={styles.descriptionText}>
-          Your Smart Study Companion! Analyze, Summarize & Optimize Notes Effortlessly
+          Your Smart Study Companion! Analyze, Summarize & Optimize Notes
+          Effortlessly
         </Text>
+        <TouchableOpacity
+          onPress={() =>
+            router.push({
+              pathname: "/(addnotes)/addnote",
+              params: { username },
+            })
+          }
+          style={[styles.getStartedButton, styles.marginBottom]}
+        >
+          <Text style={styles.getStartedText}>Add Your Note's</Text>
+        </TouchableOpacity>
         <TouchableOpacity style={styles.getStartedButton}>
           <Text style={styles.getStartedText}>Get Started with PrepEase</Text>
         </TouchableOpacity>
@@ -43,78 +137,14 @@ const MainDashboard = () => {
         <Text style={styles.exploreText}>Explore Our Powerful Features</Text>
       </View>
 
-      {/* Scrollable Cards Section */}
-      <ScrollView contentContainerStyle={styles.cardsContainer}>
-        {/* Card 1 */}
-        <Card
-          imageSource={detectLanguageImage}
-          featureName="Detect Language"
-          description="Identify the language used in uploaded notes."
-         // onPress={() => navigation.navigate('./DetectLanguage/NotesListScreen')}
-         onPress={handleDetectLanguage}
-        />
-
-        {/* Card 2 */}
-        <Card
-          imageSource={summarizeText}
-          featureName="Summarize Text"
-          description="Get a concise summary of your study materials."
-        />
-
-        {/* Card 3 */}
-        <Card
-          imageSource={optimizeNotes}
-          featureName="Optimize Notes"
-          description="Improve the quality of your notes."
-        />
-
-        {/* Card 4 */}
-         <Card
-          imageSource={detectLanguageImage}
-          featureName="Detect Language"
-          description="Identify the language used in uploaded notes."
-        />
-
-        {/* Card 5 */}
-        <Card
-          imageSource={summarizeText}
-          featureName="Summarize Text"
-          description="Get a concise summary of your study materials."
-        />
-
-        {/* Card 6 */}
-        <Card
-          imageSource={optimizeNotes}
-          featureName="Optimize Notes"
-          description="Improve the quality of your notes."
-        />
-
-        {/* Card 7 */}
-         <Card
-          imageSource={detectLanguageImage}
-          featureName="Detect Language"
-          description="Identify the language used in uploaded notes."
-        />
-
-        {/* Card 8 */}
-        <Card
-          imageSource={summarizeText}
-          featureName="Summarize Text"
-          description="Get a concise summary of your study materials."
-        />
-
-        {/* Card 9 */}
-        <Card
-          imageSource={optimizeNotes}
-          featureName="Optimize Notes"
-          description="Improve the quality of your notes."
-        />
-      </ScrollView>
-
-       {/* Bottom Navigation (Placeholder) */}
-       <View style={styles.bottomNav}>
-          <View style={styles.homeIcon} /> {/* Placeholder for home icon */}
-        </View>
+      {/* FlatList for Feature Cards */}
+      <FlatList
+        data={features}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={renderFeatureCard}
+        contentContainerStyle={styles.cardsContainer}
+        numColumns={2} // Display cards in two columns
+      />
     </View>
   );
 };
@@ -122,80 +152,73 @@ const MainDashboard = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E6E0FF',  // Background color from image
+    backgroundColor: "#E6E0FF",
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     padding: 20,
   },
   prepEaseText: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: '#4A148C',  // Dark purple color
+    fontWeight: "bold",
+    color: "#4A148C",
   },
   profileIcon: {
     width: 30,
     height: 30,
     borderRadius: 15,
-    backgroundColor: '#D1C4E9', // light purple
+    backgroundColor: "#D1C4E9",
+    justifyContent: "center",
+    alignItems: "center",
   },
   welcomeSection: {
     padding: 20,
   },
   welcomeText: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#4A148C',
+    fontWeight: "bold",
+    color: "#4A148C",
   },
   nameText: {
     fontSize: 32,
-    fontWeight: 'bold',
-    color: '#4A148C',
+    fontWeight: "bold",
+    color: "#4A148C",
     marginBottom: 10,
   },
   descriptionText: {
     fontSize: 16,
-    color: '#4A148C',
+    color: "#4A148C",
     marginBottom: 20,
   },
+  marginBottom: {
+    marginBottom: 4,
+  },
   getStartedButton: {
-    backgroundColor: '#7B1FA2', // Dark purple
+    backgroundColor: "#7B1FA2",
     padding: 12,
     borderRadius: 25,
-    alignItems: 'center',
+    alignItems: "center",
+    marginBottom: 10,
   },
   getStartedText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   exploreSection: {
     padding: 20,
   },
   exploreText: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: '#4A148C',
+    fontWeight: "bold",
+    color: "#4A148C",
   },
   cardsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    padding: 10,
-  },
-   bottomNav: {
-    height: 60,
-    backgroundColor: '#7B1FA2', // Dark purple
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  homeIcon: {
-    width: 35,
-    height: 35,
-    borderRadius: 17.5,
-    backgroundColor: '#D1C4E9',
+    paddingHorizontal: 10,
+    paddingBottom: 20,
+    alignItems: "center",
   },
 });
 
