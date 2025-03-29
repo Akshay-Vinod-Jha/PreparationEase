@@ -10,7 +10,7 @@ import "expo-dev-client";
 import { db, setDoc, doc, getDoc } from "@/firebaseConfig";
 const PrepaseLogo = require("../images/PrepaseLogo.jpg");
 const AppLogo = require("../images/Logo.png");
-
+import { StatusBar } from 'react-native';
 const LoginScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -78,6 +78,7 @@ const LoginScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+          <StatusBar backgroundColor="#E6E0FF" barStyle="dark-content" />
       <View style={styles.upper}>
         <Image source={AppLogo} style={styles.imageStyle} />
         <Image source={PrepaseLogo} />
