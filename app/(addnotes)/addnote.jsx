@@ -12,7 +12,7 @@ import { useLocalSearchParams } from "expo-router";
 import RenderNote from "@/components/RenderNote";
 import { db, collection, getDocs } from "@/firebaseConfig";
 import { addDoc } from "firebase/firestore";
-
+import { Colors } from "@/styles/Colors";
 export default function AddNote() {
   const { username } = useLocalSearchParams();
   const [showForm, setShowForm] = useState(false);
@@ -66,13 +66,13 @@ export default function AddNote() {
 
       // Properly update notes state with the new note
       setNotes((alldata) => [
-        ...alldata,
         {
           id: data.id,
           noteTitle: noteTitle.trim() ? noteTitle.trim() : "",
           noteContent: noteContent.trim() ? noteContent.trim() : "",
           timeStamp: ctimestamp,
         },
+        ...alldata,
       ]);
 
       // Reset form fields
@@ -199,7 +199,7 @@ export default function AddNote() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E6E0FF",
+    backgroundColor: Colors.backgroundLight,
     padding: 16,
   },
   header: {

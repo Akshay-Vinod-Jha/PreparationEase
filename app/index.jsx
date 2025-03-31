@@ -78,7 +78,7 @@ const LoginScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor="#E6E0FF" barStyle="dark-content" />
+      <StatusBar backgroundColor="#735DA5" barStyle="dark-content" />
       <View style={styles.upper}>
         <Image source={AppLogo} style={styles.imageStyle} />
         <Image source={PrepaseLogo} />

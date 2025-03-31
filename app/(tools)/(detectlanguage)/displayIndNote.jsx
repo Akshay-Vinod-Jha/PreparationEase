@@ -6,10 +6,73 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   StyleSheet,
-  FlatList,
   SafeAreaView,
+  ScrollView,
 } from "react-native";
+import { IpAddressBackend } from "@/IpBackendReturn";
+// Language code to full name mapping
+export const languageMapping = {
+  af: "Afrikaans",
+  ar: "Arabic",
+  bg: "Bulgarian",
+  bn: "Bengali",
+  ca: "Catalan",
+  cs: "Czech",
+  cy: "Welsh",
+  da: "Danish",
+  de: "German",
+  el: "Greek",
+  en: "English",
+  es: "Spanish",
+  et: "Estonian",
+  fa: "Persian",
+  fi: "Finnish",
+  fr: "French",
+  gu: "Gujarati",
+  he: "Hebrew",
+  hi: "Hindi",
+  hr: "Croatian",
+  hu: "Hungarian",
+  id: "Indonesian",
+  it: "Italian",
+  ja: "Japanese",
+  kn: "Kannada",
+  ko: "Korean",
+  lt: "Lithuanian",
+  lv: "Latvian",
+  mk: "Macedonian",
+  ml: "Malayalam",
+  mr: "Marathi",
+  ne: "Nepali",
+  nl: "Dutch",
+  no: "Norwegian",
+  pa: "Punjabi",
+  pl: "Polish",
+  pt: "Portuguese",
+  ro: "Romanian",
+  ru: "Russian",
+  sk: "Slovak",
+  sl: "Slovenian",
+  so: "Somali",
+  sq: "Albanian",
+  sv: "Swedish",
+  sw: "Swahili",
+  ta: "Tamil",
+  te: "Telugu",
+  th: "Thai",
+  tl: "Tagalog",
+  tr: "Turkish",
+  uk: "Ukrainian",
+  ur: "Urdu",
+  vi: "Vietnamese",
+  zh: "Chinese",
+};
 
+// Function to convert language code to full name
+export const getLanguageName = (code) => {
+  // Return the full name if found, otherwise return the code
+  return languageMapping[code.trim()] || code;
+};
 export default function DisplayIndNote() {
   const { noteTitle, noteContent, timestamp, id } = useLocalSearchParams();
   const [status, setStatus] = useState("default");
@@ -21,26 +84,34 @@ export default function DisplayIndNote() {
     setStatus("loading");
 
     try {
-      const res = await fetch("http://192.168.1.101:5000/detect-language", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ text: noteContent }),
-      });
+      const res = await fetch(
+        `http://${IpAddressBackend}:5000/detect-language`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text: noteContent }),
+        }
+      );
 
       const data = await res.json();
 
       if (data.status === "pass") {
-        setResponse({ language: data.language });
+        setResponse({
+          language: data.language,
+          languageName: getLanguageName(data.language),
+        });
 
         const parsedProbableLanguages = data.probable_languages
           .replace(/\[|\]/g, "")
           .split(",")
           .map((item) => {
             const [lang, prob] = item.split(":");
+            const trimmedLang = lang.trim();
             return {
-              language: lang.trim(),
+              language: trimmedLang,
+              languageName: getLanguageName(trimmedLang),
               probability: parseFloat(prob).toFixed(4),
             };
           });
@@ -70,7 +141,11 @@ export default function DisplayIndNote() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+        showsVerticalScrollIndicator={true}
+      >
         {/* Header */}
         <Text style={styles.header}>Detected Language</Text>
 
@@ -95,7 +170,8 @@ export default function DisplayIndNote() {
           <>
             <View style={styles.resultContainer}>
               <Text style={styles.resultLabel}>Detected Language</Text>
-              <Text style={styles.detectedLang}>{response.language}</Text>
+              <Text style={styles.detectedLang}>{response.languageName}</Text>
+              <Text style={styles.langCode}>({response.language})</Text>
             </View>
 
             {/* Note Information */}
@@ -108,17 +184,14 @@ export default function DisplayIndNote() {
             </View>
 
             <Text style={styles.sectionHeader}>Analysis Results</Text>
-          </>
-        )}
 
-        {/* Probable Languages List */}
-        {status === "success" && (
-          <FlatList
-            data={probableLanguages}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <View style={styles.languageItem}>
-                <Text style={styles.languageText}>{item.language}</Text>
+            {/* Probable Languages List */}
+            {probableLanguages.map((item, index) => (
+              <View key={index} style={styles.languageItem}>
+                <View style={styles.languageHeader}>
+                  <Text style={styles.languageText}>{item.languageName}</Text>
+                  <Text style={styles.languageCode}>({item.language})</Text>
+                </View>
                 <View style={styles.probabilityContainer}>
                   <View
                     style={[
@@ -129,12 +202,10 @@ export default function DisplayIndNote() {
                   <Text style={styles.probabilityText}>{item.probability}</Text>
                 </View>
               </View>
-            )}
-            contentContainerStyle={styles.flatListContainer}
-            showsVerticalScrollIndicator={false}
-          />
+            ))}
+          </>
         )}
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -146,7 +217,10 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+  },
+  contentContainer: {
     padding: 20,
+    paddingBottom: 40, // Extra padding at the bottom for better scrolling
   },
   header: {
     fontSize: 24,
@@ -210,6 +284,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#5D4A7E",
   },
+  langCode: {
+    fontSize: 14,
+    color: "#888",
+    marginTop: 4,
+  },
   noteContainer: {
     backgroundColor: "white",
     padding: 20,
@@ -251,10 +330,6 @@ const styles = StyleSheet.create({
     color: "#2E2E2E",
     marginBottom: 16,
   },
-  flatListContainer: {
-    flexGrow: 1,
-    paddingBottom: 20,
-  },
   languageItem: {
     backgroundColor: "white",
     padding: 16,
@@ -266,18 +341,26 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 1,
   },
+  languageHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
   languageText: {
     fontSize: 16,
     fontWeight: "600",
     color: "#2E2E2E",
-    marginBottom: 8,
+  },
+  languageCode: {
+    fontSize: 12,
+    color: "#888",
+    marginLeft: 8,
   },
   probabilityContainer: {
     height: 6,
     backgroundColor: "#F0F0F0",
     borderRadius: 3,
     position: "relative",
-    marginTop: 8,
+    marginTop: 12,
   },
   probabilityBar: {
     position: "absolute",

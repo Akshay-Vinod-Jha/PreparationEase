@@ -67,8 +67,10 @@ import React, { useState } from "react";
 import InputField from "@/components/InputField";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { db, setDoc, doc, getDoc } from "@/firebaseConfig";
+import { Colors } from "@/styles/Colors";
 import Button from "@/components/Button";
 import { useRouter } from "expo-router";
+import { StatusBar } from "react-native";
 const RegisterScreen = () => {
   const router = useRouter();
   const [username, setUsername] = useState("");
@@ -133,6 +135,11 @@ const RegisterScreen = () => {
   return (
     <View style={styles.container}>
       {/* Circular Background with Logo */}
+      <StatusBar
+        backgroundColor={Colors.backgroundLight}
+        barStyle="dark-content"
+      />
+
       <View style={styles.circleContainer}>
         <View style={styles.circle}>
           <Image source={ImageSource} style={styles.logo} />
@@ -240,7 +247,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#D0B4E3",
+    backgroundColor: Colors.backgroundLight,
     alignItems: "center",
     justifyContent: "center",
     padding: 20,

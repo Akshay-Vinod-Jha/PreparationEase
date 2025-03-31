@@ -10,6 +10,7 @@ import {
 import Card from "../../components/Card";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { Colors } from "@/styles/Colors";
 const features = [
   {
     id: 1,
@@ -56,7 +57,7 @@ const features = [
   {
     id: 8,
     name: "Images to Notes",
-    image: require("../../images/Online translator-amico.png"),
+    image: require("../../images/imagetonote.png"),
     navigateTo: "/(tools)/(imagetonotes)/first",
   },
   {
@@ -98,7 +99,10 @@ const MainDashboard = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#E6E0FF" barStyle="dark-content" />
+      <StatusBar
+        backgroundColor={Colors.backgroundLight}
+        barStyle="dark-content"
+      />
 
       {/* Header Section */}
       <View style={styles.header}>
@@ -152,7 +156,7 @@ const MainDashboard = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E6E0FF",
+    backgroundColor: Colors.backgroundLight,
   },
   header: {
     flexDirection: "row",

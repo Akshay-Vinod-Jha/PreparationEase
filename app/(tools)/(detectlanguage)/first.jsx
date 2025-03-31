@@ -12,7 +12,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useLocalSearchParams } from "expo-router";
 import { db, collection, getDocs } from "@/firebaseConfig";
 import NoteCard from "@/components/Notecard";
-
+import { Colors } from "@/styles/Colors";
 const LanguageDetectorScreen = () => {
   const { username } = useLocalSearchParams();
   const [status, setStatus] = useState("default"); // "default", "loading", "issue"
@@ -67,6 +67,9 @@ const LanguageDetectorScreen = () => {
       timestamp={item.timeStamp ? item.timeStamp : "No Timestamp Available"}
       id={item.id}
       onPress={(id) => console.log("Note clicked:", id)}
+      loc={"displayIndNote"}
+      dir={"detectlanguage"}
+      username={username}
     />
   );
 
@@ -120,7 +123,7 @@ const LanguageDetectorScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E6E0F8",
+    backgroundColor: Colors.backgroundLight,
     padding: 16,
   },
   header: {

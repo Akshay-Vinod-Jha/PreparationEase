@@ -1,7 +1,15 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  StatusBar,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
+import { Colors } from "@/styles/Colors";
 const ForgotPasswordScreen = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
@@ -10,13 +18,19 @@ const ForgotPasswordScreen = () => {
   return (
     <View style={styles.container}>
       {/* Illustration Placeholder */}
+      <StatusBar
+        backgroundColor={Colors.backgroundLight}
+        barStyle="dark-content"
+      />
       <View style={styles.imageContainer}>
         <Image source={ImageSource} style={styles.illustration} />
       </View>
 
       {/* Title and Description */}
       <Text style={styles.title}>Forgot Password?</Text>
-      <Text style={styles.subtitle}>Trouble signing in? Reset your password now!</Text>
+      <Text style={styles.subtitle}>
+        Trouble signing in? Reset your password now!
+      </Text>
 
       {/* New Password Field */}
       <View style={styles.inputContainer}>
@@ -30,7 +44,11 @@ const ForgotPasswordScreen = () => {
           style={styles.eyeIcon}
           onPress={() => setPasswordVisible(!passwordVisible)}
         >
-          <Ionicons name={passwordVisible ? "eye-off" : "eye"} size={20} color="black" />
+          <Ionicons
+            name={passwordVisible ? "eye-off" : "eye"}
+            size={20}
+            color="black"
+          />
         </TouchableOpacity>
       </View>
 
@@ -46,7 +64,11 @@ const ForgotPasswordScreen = () => {
           style={styles.eyeIcon}
           onPress={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
         >
-          <Ionicons name={confirmPasswordVisible ? "eye-off" : "eye"} size={20} color="black" />
+          <Ionicons
+            name={confirmPasswordVisible ? "eye-off" : "eye"}
+            size={20}
+            color="black"
+          />
         </TouchableOpacity>
       </View>
 
@@ -61,7 +83,7 @@ const ForgotPasswordScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#D0B4E3",
+    backgroundColor: Colors.backgroundLight,
     alignItems: "center",
     justifyContent: "center",
     padding: 20,

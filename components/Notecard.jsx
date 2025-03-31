@@ -1,6 +1,15 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
-const NoteCard = ({ noteTitle, noteContent, timestamp, id }) => {
+const NoteCard = ({
+  noteTitle,
+  noteContent,
+  timestamp,
+  id,
+  loc,
+  dir,
+  username,
+  data = "",
+}) => {
   const router = useRouter();
   return (
     <TouchableOpacity
@@ -8,12 +17,14 @@ const NoteCard = ({ noteTitle, noteContent, timestamp, id }) => {
       onPress={() => {
         console.log("Note with id was pressed", id);
         router.push({
-          pathname: "/(tools)/(detectlanguage)/displayIndNote",
+          pathname: `/(tools)/(${dir})/${loc}`,
           params: {
             id,
             noteTitle,
             noteContent,
             timestamp,
+            username,
+            data,
           },
         });
       }}
