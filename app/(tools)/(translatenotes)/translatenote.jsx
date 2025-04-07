@@ -335,7 +335,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   selectedLanguageItemText: {
-    color: "#6200ee",
+    color: Colors.primary,
     fontWeight: "bold",
   },
   translatedSection: {
@@ -352,7 +352,7 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     marginTop: 10,
-    color: "#6200ee",
+    color: Colors.primary,
     fontSize: 16,
   },
   errorContainer: {
@@ -367,7 +367,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   copyButton: {
-    backgroundColor: "#7B1FA2",
+    backgroundColor: Colors.primary,
     borderRadius: 8,
     padding: 12,
     flexDirection: "row",

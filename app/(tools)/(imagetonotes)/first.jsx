@@ -546,7 +546,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   uploadButton: {
-    backgroundColor: "#7858a6",
+    backgroundColor: Colors.primary,
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 10,
@@ -588,7 +588,7 @@ const styles = StyleSheet.create({
     shadowRadius: 1.0,
   },
   loadingText: {
-    color: "#7858a6",
+    color: Colors.primary,
     marginTop: 10,
     fontWeight: "500",
     fontSize: 16,
@@ -623,7 +623,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   copyButton: {
-    backgroundColor: "#7858a6",
+    backgroundColor: Colors.primary,
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 6,
@@ -631,7 +631,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   addToNotesButton: {
-    backgroundColor: "#5ea85e",
+    backgroundColor: Colors.primary,
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 6,
@@ -750,7 +750,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   addButton: {
-    backgroundColor: "#5ea85e",
+    backgroundColor: Colors.primary,
     paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 8,

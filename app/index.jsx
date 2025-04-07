@@ -7,7 +7,7 @@ import { Colors } from "@/styles/Colors";
 import { Image } from "react-native";
 import { useRouter } from "expo-router";
 import "expo-dev-client";
-import { db, setDoc, doc, getDoc } from "@/firebaseConfig";
+import { db, doc, getDoc } from "@/firebaseConfig";
 const PrepaseLogo = require("../images/PrepaseLogo.jpg");
 const AppLogo = require("../images/Logo.png");
 import { StatusBar } from "react-native";
@@ -73,7 +73,12 @@ const LoginScreen = () => {
   };
   const goToForgotPassword = () => {
     console.log("opening forgot password page");
-    router.push("/ForgotPassword");
+    router.push({
+      pathname: "/(authentication)/ForgotPassword",
+      params: {
+        username: "",
+      },
+    });
   };
 
   return (

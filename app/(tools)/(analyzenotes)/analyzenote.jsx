@@ -282,7 +282,7 @@ export default function AnalyzeNote() {
 
 const styles = StyleSheet.create({
   copyButton: {
-    backgroundColor: "#7B1FA2",
+    backgroundColor: Colors.primary,
     borderRadius: 8,
     padding: 12,
     flexDirection: "row",
@@ -304,10 +304,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#E6E0F8",
+    backgroundColor: Colors.primary,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#E6E0F8",
+    borderBottomColor: Colors.primary,
   },
   backIcon: {
     width: 40,
@@ -381,7 +381,7 @@ const styles = StyleSheet.create({
   toggleButtonText: {
     fontSize: 14,
     fontWeight: "500",
-    color: "#7B1FA2",
+    color: Colors.primary,
     marginRight: 4,
   },
   analysisSection: {
@@ -417,7 +417,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     fontSize: 18,
     fontWeight: "500",
-    color: "#7B1FA2",
+    color: Colors.primary,
   },
   loadingSubtext: {
     marginTop: 8,
@@ -433,7 +433,7 @@ const styles = StyleSheet.create({
   defaultText: {
     marginTop: 12,
     fontSize: 16,
-    color: "#757575",
+    color: Colors.primary,
     textAlign: "center",
   },
   errorContainer: {
@@ -483,7 +483,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 20,
     right: 20,
-    backgroundColor: "#6200ee",
+    backgroundColor: Colors.primary,
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: 4,
@@ -510,7 +510,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 16,
     borderLeftWidth: 4,
-    borderLeftColor: "#7B1FA2",
+    borderLeftColor: Colors.primary,
   },
   summaryText: {
     fontSize: 16,

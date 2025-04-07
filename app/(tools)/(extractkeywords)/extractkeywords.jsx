@@ -163,7 +163,6 @@ export default function ExtractKeywords() {
 
         <View style={styles.analysisSection}>
           <View style={styles.analysisHeader}>
-            <Ionicons name="key-outline" size={24} color="#7B1FA2" />
             <Text style={styles.analysisTitle}>Key Terms</Text>
           </View>
           <View style={styles.analysisCard}>{renderContent()}</View>
@@ -176,7 +175,7 @@ export default function ExtractKeywords() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#E6E0F8",
+    backgroundColor: Colors.backgroundLight,
   },
   container: {
     flex: 1,
@@ -249,7 +248,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     fontSize: 18,
     fontWeight: "500",
-    color: "#7B1FA2",
+    color: Colors.primary,
   },
   loadingSubtext: {
     marginTop: 8,
@@ -266,7 +265,7 @@ const styles = StyleSheet.create({
     padding: 16,
     marginBottom: 16,
     borderLeftWidth: 4,
-    borderLeftColor: "#7B1FA2",
+    borderLeftColor: Colors.primary,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
@@ -276,7 +275,7 @@ const styles = StyleSheet.create({
   keywordTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#7B1FA2",
+    color: Colors.primary,
     marginBottom: 10,
   },
   keywordValue: {

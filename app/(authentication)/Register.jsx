@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
   circleContainer: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#744DA9",
+    backgroundColor: Colors.primary,
     width: 300,
     height: 300,
     borderRadius: 150,
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
   circle: {
     width: 280,
     height: 280,
-    backgroundColor: "#744DA9",
+    backgroundColor: Colors.primary,
     borderRadius: 140,
     alignItems: "center",
     justifyContent: "center",
@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
     right: 10,
   },
   registerButton: {
-    backgroundColor: "#744DA9",
+    backgroundColor: Colors.primary,
     paddingVertical: 12,
     borderRadius: 25,
     width: "100%",

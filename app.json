@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "ReactNativeProject",
+    "name": "PrepEase",
     "slug": "ReactNativeProject",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/PrepaseLogo.jpg",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -14,25 +14,25 @@
     "android": {
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/PrepaseLogo.jpg",
+        "backgroundColor": "#735DA5"
       },
       "package": "com.akshayjha.ReactNativeProject"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/PrepaseLogo.jpg"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/PrepaseLogo.jpg",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#735DA5"
         }
       ]
     ],
@@ -44,7 +44,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "86eca40c-d6a0-4247-8749-96bfa84fcb4f"
+        "projectId": "c1b46918-2216-4186-9247-cfd0189acba5"
       }
     }
   }

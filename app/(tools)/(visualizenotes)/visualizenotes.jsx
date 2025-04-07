@@ -220,7 +220,6 @@ export default function VisualizeNotes() {
               onPress={downloadImage}
               activeOpacity={0.7}
             >
-              <Ionicons name="download-outline" size={20} color="#fff" />
               <Text style={styles.downloadButtonText}>Download Diagram</Text>
             </TouchableOpacity>
           </View>
@@ -239,7 +238,6 @@ export default function VisualizeNotes() {
               onPress={retryGeneration}
               activeOpacity={0.7}
             >
-              <Ionicons name="refresh" size={20} color="#fff" />
               <Text style={styles.retryButtonText}>Try Again</Text>
             </TouchableOpacity>
           </View>
@@ -297,7 +295,6 @@ export default function VisualizeNotes() {
 
         <View style={styles.visualizationSection}>
           <View style={styles.visualizationHeader}>
-            <Ionicons name="bar-chart-outline" size={24} color="#7B1FA2" />
             <Text style={styles.visualizationTitle}>Note Visualization</Text>
           </View>
           <View style={styles.visualizationCard}>{renderContent()}</View>
@@ -367,7 +364,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   toggleButtonText: {
-    color: "#6200ee",
+    color: Colors.primary,
     fontSize: 14,
     fontWeight: "600",
     marginRight: 4,
@@ -405,7 +402,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     fontSize: 18,
     fontWeight: "500",
-    color: "#7B1FA2",
+    color: Colors.primary,
   },
   loadingSubtext: {
     marginTop: 8,
@@ -430,7 +427,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8f8ff",
   },
   downloadButton: {
-    backgroundColor: "#6200ee",
+    backgroundColor: Colors.primary,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -458,7 +455,7 @@ const styles = StyleSheet.create({
   defaultText: {
     marginTop: 12,
     fontSize: 16,
-    color: "#757575",
+    color: Colors.primary,
     textAlign: "center",
   },
   errorContainer: {

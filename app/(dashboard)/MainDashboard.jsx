@@ -4,14 +4,15 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  FlatList,
+  ScrollView,
   StatusBar,
 } from "react-native";
-import Card from "../../components/Card";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { Colors } from "@/styles/Colors";
-const features = [
+import FeatureList from "@/components/FeatureList";
+// Features data remains the same
+export const features = [
   {
     id: 1,
     name: "Detect Language",
@@ -52,7 +53,7 @@ const features = [
     id: 7,
     name: "Listen to Notes",
     image: require("../../images/Audiobook-pana.png"),
-    navigateTo: "/(tools)/(texttoaudio)/first",
+    navigateTo: "/(tools)/(textoaudio)/first",
   },
   {
     id: 8,
@@ -81,22 +82,14 @@ const MainDashboard = () => {
   useEffect(() => {
     console.log("MainDashboard username is", username);
   }, [username]);
-
-  const renderFeatureCard = ({ item }) => (
-    <Card
-      imageSource={item.image}
-      featureName={item.name}
-      onPress={() => {
-        router.push({
-          pathname: item.navigateTo,
-          params: {
-            username,
-          },
-        });
-      }}
-    />
-  );
-
+  const handleProfile = () => {
+    router.push({
+      pathname: "/(profile)/profile",
+      params: {
+        username,
+      },
+    });
+  };
   return (
     <View style={styles.container}>
       <StatusBar
@@ -107,48 +100,58 @@ const MainDashboard = () => {
       {/* Header Section */}
       <View style={styles.header}>
         <Text style={styles.prepEaseText}>PREPEASE</Text>
-        <View style={styles.profileIcon}>
+        <TouchableOpacity onPress={handleProfile} style={styles.profileIcon}>
           <Icon name="person" size={25} color="black" />
+        </TouchableOpacity>
+      </View>
+
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Welcome Section */}
+        <View style={styles.welcomeSection}>
+          <Text style={styles.welcomeText}>Welcome</Text>
+          <Text style={styles.nameText}>{username || "User"}!</Text>
+          <Text style={styles.descriptionText}>
+            Your Smart Study Companion! Analyze, Summarize & Optimize Notes
+            Effortlessly
+          </Text>
+          <TouchableOpacity
+            onPress={() =>
+              router.push({
+                pathname: "/(addnotes)/addnote",
+                params: { username },
+              })
+            }
+            style={[styles.getStartedButton, styles.marginBottom]}
+          >
+            <Text style={styles.getStartedText}>Add Your Note's</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.getStartedButton}
+            onPress={() =>
+              router.push({
+                pathname: "/(dashboard)/GetStartedPrepase",
+                params: {
+                  username,
+                },
+              })
+            }
+          >
+            <Text style={styles.getStartedText}>Get Started with PrepEase</Text>
+          </TouchableOpacity>
         </View>
-      </View>
 
-      {/* Welcome Section */}
-      <View style={styles.welcomeSection}>
-        <Text style={styles.welcomeText}>Welcome</Text>
-        <Text style={styles.nameText}>{username || "User"}!</Text>
-        <Text style={styles.descriptionText}>
-          Your Smart Study Companion! Analyze, Summarize & Optimize Notes
-          Effortlessly
-        </Text>
-        <TouchableOpacity
-          onPress={() =>
-            router.push({
-              pathname: "/(addnotes)/addnote",
-              params: { username },
-            })
-          }
-          style={[styles.getStartedButton, styles.marginBottom]}
-        >
-          <Text style={styles.getStartedText}>Add Your Note's</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.getStartedButton}>
-          <Text style={styles.getStartedText}>Get Started with PrepEase</Text>
-        </TouchableOpacity>
-      </View>
+        {/* Explore Features Section */}
+        <View style={styles.exploreSection}>
+          <Text style={styles.exploreText}>Explore Our Powerful Features</Text>
+        </View>
 
-      {/* Explore Features Section */}
-      <View style={styles.exploreSection}>
-        <Text style={styles.exploreText}>Explore Our Powerful Features</Text>
-      </View>
-
-      {/* FlatList for Feature Cards */}
-      <FlatList
-        data={features}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={renderFeatureCard}
-        contentContainerStyle={styles.cardsContainer}
-        numColumns={2} // Display cards in two columns
-      />
+        {/* New Feature List Component */}
+        <FeatureList
+          features={features}
+          navigation={router}
+          username={username}
+        />
+      </ScrollView>
     </View>
   );
 };
@@ -165,15 +168,15 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   prepEaseText: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: "bold",
-    color: "#4A148C",
+    color: Colors.primary,
   },
   profileIcon: {
     width: 30,
     height: 30,
     borderRadius: 15,
-    backgroundColor: "#D1C4E9",
+    backgroundColor: Colors.primary,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -183,24 +186,24 @@ const styles = StyleSheet.create({
   welcomeText: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#4A148C",
+    color: Colors.primary,
   },
   nameText: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#4A148C",
+    color: Colors.primary,
     marginBottom: 10,
   },
   descriptionText: {
     fontSize: 16,
-    color: "#4A148C",
+    color: Colors.primary,
     marginBottom: 20,
   },
   marginBottom: {
     marginBottom: 4,
   },
   getStartedButton: {
-    backgroundColor: "#7B1FA2",
+    backgroundColor: Colors.primary,
     padding: 12,
     borderRadius: 25,
     alignItems: "center",
@@ -213,16 +216,12 @@ const styles = StyleSheet.create({
   },
   exploreSection: {
     padding: 20,
+    paddingBottom: 10,
   },
   exploreText: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#4A148C",
-  },
-  cardsContainer: {
-    paddingHorizontal: 10,
-    paddingBottom: 20,
-    alignItems: "center",
+    color: Colors.primary,
   },
 });
 

@@ -14,7 +14,7 @@ import {
   Clipboard,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
+import { Colors } from "@/styles/Colors";
 export default function CheckGrammar() {
   const { noteTitle, noteContent, timestamp, id, username } =
     useLocalSearchParams();
@@ -187,7 +187,10 @@ export default function CheckGrammar() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar backgroundColor="#E6E0F8" barStyle="dark-content" />
+      <StatusBar
+        backgroundColor={Colors.backgroundLight}
+        barStyle="dark-content"
+      />
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.noteSection}>
           <View style={styles.noteMeta}>
@@ -219,7 +222,6 @@ export default function CheckGrammar() {
 
         <View style={styles.analysisSection}>
           <View style={styles.analysisHeader}>
-            <Ionicons name="pencil-outline" size={24} color="#7B1FA2" />
             <Text style={styles.analysisTitle}>Grammar Check</Text>
           </View>
           <View style={styles.analysisCard}>{renderContent()}</View>
@@ -232,11 +234,11 @@ export default function CheckGrammar() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#E6E0F8",
+    backgroundColor: Colors.backgroundLight,
   },
   container: {
     flex: 1,
-    backgroundColor: "#E6E0F8",
+    backgroundColor: Colors.backgroundLight,
     padding: 16,
   },
   noteSection: {
@@ -310,7 +312,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     fontSize: 18,
     fontWeight: "500",
-    color: "#7B1FA2",
+    color: Colors.primary,
   },
   loadingSubtext: {
     marginTop: 8,
@@ -327,7 +329,7 @@ const styles = StyleSheet.create({
     padding: 16,
     marginBottom: 20,
     borderLeftWidth: 4,
-    borderLeftColor: "#4CAF50",
+    borderLeftColor: Colors.primary,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
@@ -337,7 +339,7 @@ const styles = StyleSheet.create({
   correctedTextTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#4CAF50",
+    color: Colors.primary,
     marginBottom: 10,
   },
   correctedTextContent: {
@@ -354,13 +356,13 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   toggleButtonText: {
-    color: "#6200ee",
+    color: Colors.primary,
     fontSize: 14,
     fontWeight: "600",
     marginRight: 4,
   },
   copyButton: {
-    backgroundColor: "#6200ee",
+    backgroundColor: Colors.primary,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -411,7 +413,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   retryButton: {
-    backgroundColor: "#6200ee",
+    backgroundColor: Colors.primary,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",

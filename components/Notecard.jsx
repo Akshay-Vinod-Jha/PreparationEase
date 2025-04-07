@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
+import { Colors } from "@/styles/Colors";
 const NoteCard = ({
   noteTitle,
   noteContent,
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
     borderLeftWidth: 5,
-    borderLeftColor: "#7B1FA2", // Accent color on the left
+    borderLeftColor: Colors.primary, // Accent color on the left
   },
   noteContent: {
     flex: 1,

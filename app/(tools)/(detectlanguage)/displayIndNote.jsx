@@ -10,6 +10,7 @@ import {
   ScrollView,
 } from "react-native";
 import { IpAddressBackend } from "@/IpBackendReturn";
+import { Colors } from "@/styles/Colors";
 // Language code to full name mapping
 export const languageMapping = {
   af: "Afrikaans",
@@ -213,7 +214,7 @@ export default function DisplayIndNote() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#F5F5F7",
+    backgroundColor: Colors.backgroundLight,
   },
   container: {
     flex: 1,
@@ -236,7 +237,7 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 12,
     fontSize: 16,
-    color: "#5D4A7E",
+    color: Colors.primary,
   },
   errorContainer: {
     alignItems: "center",
@@ -251,7 +252,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   retryButton: {
-    backgroundColor: "#5D4A7E",
+    backgroundColor: Colors.primary,
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,
@@ -282,7 +283,7 @@ const styles = StyleSheet.create({
   detectedLang: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#5D4A7E",
+    color: Colors.primary,
   },
   langCode: {
     fontSize: 14,
@@ -365,7 +366,7 @@ const styles = StyleSheet.create({
   probabilityBar: {
     position: "absolute",
     height: "100%",
-    backgroundColor: "#5D4A7E",
+    backgroundColor: Colors.primary,
     borderRadius: 3,
   },
   probabilityText: {

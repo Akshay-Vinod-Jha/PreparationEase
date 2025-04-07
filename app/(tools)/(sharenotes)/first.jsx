@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: "#7b519d", // Purple color for the arrow circle
+    backgroundColor: Colors.primary, // Purple color for the arrow circle
     justifyContent: "center",
     alignItems: "center",
   },
